@@ -1,0 +1,213 @@
+<html>
+	<head>
+		<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+		<link rel="icon" href="favicon.ico" type="image/x-icon">
+		<link rel="stylesheet" type="text/css" href="style.css" />
+		<script src="blotter.min.js"></script>
+		<script src="liquidDistortMaterial.js"></script>
+		<title>I SEE YOU</title>
+		<meta property="og:site_name" content= ISEEYOU>
+		<title>I SEE YOU</title>
+		<meta name="title" content="I SEE YOU">
+		<meta name="description" content="I SEE YOU">
+		<meta property="og:type" content="website">
+		<meta property="og:url" content="httpshttps://github.com/LewinsHp">
+		<meta property="og:description" content="I SEE YOU">
+		<meta property="og:image" content="httpshttps://github.com/LewinsHp">
+		<meta property="instagram:card" content="summary_large_image">
+		<meta property="instagram:url" content="https://www.instagram.com/lewinp_/">
+		<meta property="instagram:title" content="https://www.instagram.com/lewinp_/">
+		<meta property="instagram:description" content="I SEE YOU">
+		<meta property="instagram:image" content="https://www.instagram.com/lewinp_/">
+		<script>
+			document.addEventListener("click", function() {
+				music = new Audio("noise.mp3");
+				music.addEventListener('ended', function() {
+					this.currentTime = 0;
+					this.play();
+				}, false);
+				music.play();
+			}, {once : true});
+		</script>
+		<script>
+			window.onload = function() {
+				setTimeout(function() {
+					document.getElementById("content").style.opacity = 1;
+				}, 400);
+			};
+		</script>
+
+	</head>
+	<body>
+		<div id="light"></div>
+		<div id="content">
+			<div id="beware"></div>
+			<p></p>
+			<br>
+			<p>
+			</p>
+			<br>
+			<p>
+			</p>
+			<br>
+			<p>
+			</p>
+		</div>
+		<div id="hidden"></div>
+		<div id="distortion-text"></div>
+	</body>
+	<script>
+		function jitter() {
+			light.style.filter= "brightness(0.2)";
+		}
+		function nojitter() {
+			light.style.filter = "brightness(1)";
+		}
+
+		function start() {
+			max = 12000;
+			min = 20000;
+			wait = Math.random() * (max - min) + min;
+			setTimeout(jitter, wait);
+			setTimeout(nojitter, wait+200);
+			setTimeout(start, 5000);
+		}
+
+		var light = document.querySelector("#light")
+		var body = document.querySelector("body")
+		start();
+	</script>
+
+	<script>
+		function getRandomInt(min, max) {
+			min = Math.ceil(min);
+			max = Math.floor(max);
+			return Math.floor(Math.random() * (max - min + 1)) + min;
+		}
+		function sleep (time) {
+			return new Promise((resolve) => setTimeout(resolve, time));
+		}
+		function first() {
+			setTimeout(function() {
+				scream = new Audio(`scream-${getRandomInt(1,4)}.mp3`);
+				scream.play()
+				hidden = document.getElementById("hidden");
+				boo_image = `url(\"boo-${getRandomInt(1,4)}.jpg\")`
+				hidden.style.backgroundImage = boo_image;
+				hidden.style.filter = "brightness(1)";
+				hidden.style.width = "100vw"
+				hidden.style.height = "100vh"
+				light.style.display = "none"
+				second();
+			},15000);
+		}
+		function second() {
+			sleep(2000).then(() => {
+				hidden = document.getElementById("hidden");
+				hidden.style.filter = "brightness(0)";
+				hidden.style.width = "0px"
+				hidden.style.height = "0px"
+				light.style.display = "revert"
+			});
+		}
+		first();
+		 window.setInterval(function () {
+         first();
+		 }, 30000);
+	</script>
+	<script>
+		var timeout;
+		var body = document.querySelector("body")
+		document.onmousemove = function(event) {
+			light = document.getElementById("light")
+			pos = light.getBoundingClientRect()
+			document.getElementById("light").style.top = event.pageY  - 50
+			document.getElementById("light").style.left = event.pageX - 50
+			body.classList.remove("blurout")
+			body.classList.add("blurin")
+			clearTimeout(timeout);
+			timeout = setTimeout(function(){
+				body.style.filter = "blur(0.8px)"
+				body.classList.remove("blurin")
+				body.classList.add("blurout")
+			}, 400);
+			if (typeof music === 'undefined') {
+				music = new Audio("noise.mp3");
+				music.addEventListener('ended', function() {
+					this.currentTime = 0;
+					this.play();
+				}, false);
+				music.play();
+			}
+		}
+	</script>
+	<script>
+		document.fonts.ready.then(function () {
+			function sleep (time) {
+				return new Promise((resolve) => setTimeout(resolve, time));
+			}
+			function first() {
+				setTimeout(function() {
+					content = "I See you"
+					var text = new Blotter.Text(content, {
+						family : "zodiac",
+						size : 200,
+						fill : "#000",
+						paddingLeft : 0,
+						paddingRight : 0
+					});
+					var material = new Blotter.LiquidDistortMaterial();
+					material.uniforms.uSpeed.value = 0.23;
+					material.uniforms.uVolatility.value = 0.01;
+					var blotter = new Blotter(material, {
+						texts : text
+					});
+					var elem = document.getElementById("distortion-text");
+					var scope = blotter.forText(text);
+					scope.appendTo(elem);
+					second();
+				},10000);
+			}
+			function second() {
+				sleep(15000).then(() => {
+					document.getElementById("distortion-text").classList.add("hide")
+				});
+			}
+			first();
+			var text2 = new Blotter.Text("CLICK OR BEWARE", {
+				family : "zodiac",
+				size : 60,
+				fill : "#000",
+				paddingLeft : 40,
+				paddingRight : 40
+			});
+			var material2 = new Blotter.LiquidDistortMaterial();
+			material2.uniforms.uSpeed.value = 0.23;
+			material2.uniforms.uVolatility.value = 0.01;
+			var blotter2 = new Blotter(material2, {
+				texts : text2
+			});
+			var elem2 = document.getElementById("beware");
+			var scope2 = blotter2.forText(text2);
+			scope2.appendTo(elem2);
+		});
+	</script>
+	<script>
+		var body = document.querySelector("body")
+		var timeout;
+		document.ontouchmove = function(event) {
+			light = document.getElementById("light")
+			pos = light.getBoundingClientRect()
+			document.getElementById("light").style.top = event.pageY  - 50
+			document.getElementById("light").style.left = event.pageX - 50
+			body.classList.remove("blurout")
+			body.classList.add("blurin")
+			clearTimeout(timeout);
+			timeout = setTimeout(function(){
+				body.style.filter = "blur(0.8px)"
+				body.classList.remove("blurin")
+				body.classList.add("blurout")
+			}, 400);
+		}
+	</script>
+</html>
